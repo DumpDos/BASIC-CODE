@@ -10,7 +10,7 @@ celui-ci permet une liaison série PC-Minitel pour deux joueur.
 ### Conseils :
 
 - Pensez à modifier le port de communication selon vos besoin en ligne 25
-- Script peut-être à modifier selon votre sytème d'exploitation
+- Script peut-être à modifier selon votre système d'exploitation
 
 ### Utilisation :
  
