@@ -25,20 +25,16 @@
 330 IF RU$="e" OR RU$="E" THEN 450
 340 '---------------Détection de sonnerie----port 1022 de la RS232--------
 350 COLOR 2,0:PRINT"SERVEUR EN FONCTIONNEMENT"
-360 AP=AP+1: PRINT"NOMBRE D'APPELS=";AP:PRINT"valeur du port
-1022=";INP(1022)
+360 AP=AP+1: PRINT"NOMBRE D'APPELS=";AP:PRINT"valeur du port 1022=";INP(1022)
 370 A=INP(1022) :IF A=0 OR A=160 THEN 370
-380 '-----Temporisation pour réception code sonnerie et touche du
-MINITEL---
+380 '-----Temporisation pour réception code sonnerie et touche du MINITEL---
 390 W=5:GOSUB 840:'temporisation
 400 PRINT #1,CHR$(27);"9";"o":PRINT #1,CHR$(27);"9";"h":'connexion
 410 GOSUB 780:'temporisation pour saisie
 420 'A$=INPUT$(1,#1)
-430 W=5:GOSUB 840:'temporisation
-40 GOSUB 780:'temporisation pour saisie
+430 W=5:GOSUB 840:'temporisation 40 GOSUB 780:'temporisation pour saisie
 450 '------------DIALOGUE EN DIRECT(module N°3 du serveur)--------------
-460 LOCATE 15,15:COLOR 18,0:PRINT"ATTENTION DIALOGUE EN DIRECT---->
-Appuyez sur une touche"
+460 LOCATE 15,15:COLOR 18,0:PRINT"ATTENTION DIALOGUE EN DIRECT----> Appuyez sur une touche"
 470 'W=7:GOSUB 30520:'temporisation
 480 GOSUB 730:X=4:Y=1:GOSUB 740:PRINT#1,DH$+"ATTENDEZ JE VAIS VOIR S'IL Y A QUELQU'UN..."
 490 'W=5:GOSUB 30520:'temporisation
@@ -48,8 +44,7 @@ Appuyez sur une touche"
 530 IF INKEY$<>"" THEN 560 ELSE NEXT
 540 GOSUB 730
 550 PRINT#1,CLI$;"DESOLE IL N'Y A PERSONNE !......... AU REVOIR*******>" :CLS:PRINT"essai terminé,relançez le programme":COLOR 2,0:CLS:GOTO 170
-560 A$="":GOSUB 730:X=5:Y=5:GOSUB 740:PRINT#1,"BONJOUR ! C'EST LE ";DATF$;" NOUS ALLONS DIALOGUER EN DIRECT*******> A VOUS":GOSUB
-790:GOSUB 820
+560 A$="":GOSUB 730:X=5:Y=5:GOSUB 740:PRINT#1,"BONJOUR ! C'EST LE ";DATF$;" NOUS ALLONS DIALOGUER EN DIRECT*******> A VOUS":GOSUB 790:GOSUB 820
 570 '-------------Editeur de texte MINITEL élémentaire-------------------
 580 Y=5:X=9
 590 GOSUB 750:GOSUB 780
@@ -71,8 +66,7 @@ Appuyez sur une touche"
 750 PRINT#1,CHR$(31);:RETURN:'Mise du curseur à 0
 760 FOR I=1 TO 100:PRINT I:X=20:Y=12:GOSUB 740:PRINT#1,"Patientez..":NEXT:RETURN:'temporisation affichage
 770 IF ASC(A$)=19 THEN PRINT#1,"Touche interdite!..":RETURN:'erreur de frappe
-780 W=10:TE!=TIMER:WHILE TIMER<TE!+W :IF EOF(1) THEN WEND:GOTO
-870:ELSE A$=INPUT$(1,#1):RETURN:'temporisation dans la saisie des données et commande de déconnexion ou retour au menu
+780 W=10:TE!=TIMER:WHILE TIMER<TE!+W :IF EOF(1) THEN WEND:GOTO 870:ELSE A$=INPUT$(1,#1):RETURN:'temporisation dans la saisie des données et commande de déconnexion ou retour au menu
 790 X=20:Y=14:GOSUB 740:PRINT#1,"Pour achever";IV$;" Appuyer sur *":RETURN
 800 X=21:Y=14:GOSUB 740:PRINT#1,"Pour Corriger Appuyer sur # ":RETURN
 810 X=22:Y=19:GOSUB 740:PRINT#1,"Pour continuer SUITE":RETURN
