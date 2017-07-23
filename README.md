@@ -2,6 +2,10 @@
 
 Scripts BASIC pour systèmes MS-DOS ou DOS-box
 
+## Executable GWBasic (GWBASIC.EXE)
+
+Environement éxécutable sous MS-DOS ou DOS-Box pour l'éxécution des codes en BASIC
+
 ## Bataille Navale (BATAILLE.BAS)
 
 Ce script est une republication du jeu de la bataille navale sur Minitel, 
