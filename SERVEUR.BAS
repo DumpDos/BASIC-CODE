@@ -40,3 +40,85 @@ MINITEL---
 410 GOSUB 780:'temporisation pour saisie
 420 'A$=INPUT$(1,#1)
 430 W=5:GOSUB 840:'temporisation
+40 GOSUB 780:'temporisation pour saisie
+450 '------------DIALOGUE EN DIRECT(module N°3 du serveur)------------
+--
+460 LOCATE 15,15:COLOR 18,0:PRINT"ATTENTION DIALOGUE EN DIRECT---->
+Appuyez sur une touche"
+470 'W=7:GOSUB 30520:'temporisation
+480 GOSUB 730:X=4:Y=1:GOSUB 740:PRINT#1,DH$+"ATTENDEZ JE VAIS VOIR
+S'IL Y A QUELQU'UN..."
+490 'W=5:GOSUB 30520:'temporisation
+500 'PLAY"MB CD EFG"
+510 PLAY"O3 L4 C L2 EE L8 E L4 EE D C F L1 L4"
+520 FOR I=1 TO 100:BEEP
+530 IF INKEY$<>"" THEN 560 ELSE NEXT
+540 GOSUB 730
+550 PRINT#1,CLI$;"DESOLE IL N'Y A PERSONNE !.........
+AUREVOIR*******>" :CLS:PRINT"essai terminé,relançez le
+programme":COLOR 2,0:CLS:GOTO 170
+560 A$="":GOSUB 730:X=5:Y=5:GOSUB 740:PRINT#1,"BONJOUR ! C'EST LE
+";DATF$;" NOUS ALLONS DIALOGUER EN DIRECT*******> A VOUS":GOSUB
+790:GOSUB 820
+570 '-------------Editeur de texte MINITEL élémentaire----------------
+---
+580 Y=5:X=9
+590 GOSUB 750:GOSUB 780
+600 IF X=20 THEN GOSUB 730:GOTO 560
+610 IF ASC(A$)=19 THEN GOSUB 890
+620 IF A$="#" THEN COLOR 2,0:CLS:PRINT"ESSAI terminé RELANCER LE Pro-
+gramme":COLOR 2,0:CLS :END
+630 DIA$=DIA$+A$:GOSUB 740:PRINT#1,DIA$;
+640 IF RIGHT$(DIA$,1)<> "*" THEN 590
+650 IF RIGHT$(DIA$,1)="*" THEN CLS:COLOR 2,0:PRINT DIA$:DIA$=""
+660 INPUT "DIALOGUE:";ODIA$:DI=LEN(ODIA$):A$="":FOR I=1 TO
+DI:A$=MID$(ODIA$,I,1):GOSUB 940:ODIALO$=ODIALO$+A$:A$="":NEXT I
+670 X=X+2:GOSUB 740:PRINT#1,ODIALO$;"*******>";"A VOUS....":FOR I=1 TO
+10:PRINT#1,CHR$(7):NEXT:GOSUB 740:X=X+2:Y=1:ODIALO$=""
+680 IF X=>20 THEN X=1:GOSUB 730:GOTO 560
+690 COLOR 2,0:CLS
+700 GOTO 590
+710 RESUME
+720 '--------------Routines MINITEL---------------------------------
+730 PRINT #1,CHR$(12):RETURN:'nettoyage écran
+740 PRINT#1,CHR$(31);CHR$(X+64);CHR$(Y+64);:RETURN:'équivalent locate
+gwbasic
+750 PRINT#1,CHR$(31);:RETURN:'Mise du curseur à 0
+760 FOR I=1 TO 100:PRINT I:X=20:Y=12:GOSUB 740
+:PRINT#1,"Patientez..":NEXT:RETURN:'temporisation affichage
+770 IF ASC(A$)=19 THEN PRINT#1,"Touche interdite!..":RETURN:'erreur de
+frappe
+780 W=10:TE!=TIMER:WHILE TIMER<TE!+W :IF EOF(1) THEN WEND:GOTO
+870:ELSE A$=INPUT$(1,#1):RETURN:'temporisation dans la saisie des
+données et commande de déconnexion ou retour au menu
+790 X=20:Y=14:GOSUB 740:PRINT#1,"Pour achever";IV$;" Appuyer sur *
+":RETURN
+800 X=21:Y=14:GOSUB 740:PRINT#1,"Pour Corriger Appuyer sur # ":RETURN
+810 X=22:Y=19:GOSUB 740:PRINT#1,"Pour continuer SUITE":RETURN
+820 X=21:Y=2:GOSUB 740:PRINT#1,"Pour revenir au
+Menu";IV$;"SOMMAIRE":RETURN
+830 X=23:Y=15:GOSUB 740:PRINT#1,"Pour corriger CORRECTION":RETURN
+840 TE!=TIMER :'Temporisation
+850 WHILE TIMER<TE!+W:WEND:'Temporisation
+860 W=0:PRINT"TEMPORISATION REALISEE":RETURN:'Temporisation
+870 PRINT#1,CHR$(27);"9";"g":CLOSE:GOTO 170 :'déconnexion
+880 '----------------------Test pour les touches:---------
+ENVOI(A),SUITE(H)-RETOUR(B)-CORRECTION(G)-GUIDE(D)-SOMMAIRE(F)-
+ANNULATION(E)-REPETITION(C)-CONNEXION-FIN(I)
+890 GOSUB 780
+900 IF A$="A" OR A$="H" OR A$="B" OR A$="G" OR A$="C" OR A$="D" OR
+A$="I" THEN GOSUB 770:GOTO 560
+910 IF A$="F" THEN 560
+920 RETURN
+930 '-----------------Lecture des accents pour le MINITEL-------------
+---
+940 IF A$="é" THEN A$=EA$
+950 IF A$="ê" THEN A$=EC$
+960 IF A$="ë" THEN A$=ET$
+970 IF A$="è" THEN A$=EG$
+980 IF A$="î" THEN A$=IC$
+990 IF A$="ï" THEN A$=IT$
+1000 IF A$="ô" THEN A$=OC$
+1010 IF A$="à" THEN A$=AA$
+1020 RETURN
+1030 RESUME
